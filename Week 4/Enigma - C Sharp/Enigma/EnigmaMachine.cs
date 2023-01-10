@@ -37,6 +37,12 @@ namespace Enigma
         /// 
         public static string Encode(string message, int incrementNumber, List<string> rotors)   
         {
+
+            //Alphabet array  
+            string[] alphabet =  {"A","B","C","D","E","F","G","H","I","J","K","L",
+                                "M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
+            };
+
             // TO DO - add your implementation
             throw new NotImplementedException();
         }
