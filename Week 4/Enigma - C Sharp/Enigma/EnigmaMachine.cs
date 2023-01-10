@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -42,6 +43,57 @@ namespace Enigma
             string[] alphabet =  {"A","B","C","D","E","F","G","H","I","J","K","L",
                                 "M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
             };
+
+            //***********************************************************************************************************
+            //**********                                                                                            ******
+            //**********  TEST DATA ONLY TO BE ROMOVED WHEN   FormatInputMessage AND CaesarShift ARE IMPLEMENTED    ******
+            //**********                                                                                            ******
+            //**********                                                                                            ******
+            /********/  List<string> rotorss = new List<string> { "B", "D", "F", "H", "J", "L", "C", "P", "R",      /*****            
+            /*********/    "T", "X", "V", "Z", "N", "Y", "E", "I", "W", "G", "A", "K", "M", "U", "S", "Q", "O" };   /*****
+            /**********/
+            /**********/                    message = "a AM..e.";                                                   /*****
+            //***********************************************************************************************************
+            //******************TEST DATA ENDS HERE***********************************************************************/
+
+
+            message = message.ToUpper().Replace("..", "."); //Upper casing and removing ..
+            string encodedMessage = "";  
+
+            //Applying the keys within the List rotors
+
+            for (int i = 0; i < message.Length; i++)
+            {
+                //handling the space and .
+                if (message[i] == ' ')
+                {
+                    encodedMessage += "?";
+                }
+                else if (message[i] == '.')
+                {
+                    encodedMessage += "€";
+                }
+                else
+                {
+                    //handling letters
+                    
+                    for (int j = 0; j < alphabet.Length; j++) 
+                    {
+                        //26 letters in  alphabet array and 26 letters in rotors Array 
+                        //the positions of every character in one mirrors the other.
+                        //as soon as the current character is found in the alpha array,
+                        //we know its equivalent will be at the same position in rotors array.
+                        if (alphabet[j].Equals(message[i].ToString()))                        {
+                            
+                            encodedMessage += (string)rotorss.ElementAt(j);
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+            return encodedMessage;
 
             // TO DO - add your implementation
             throw new NotImplementedException();
