@@ -128,17 +128,27 @@ namespace Enigma
         /// specified shift number.</returns>
         public static string CaesarShift(string message, int shift, bool encode)
         {
-            string shiftedString = string.Empty;
+            string shiftedText = string.Empty;
+            int index, newIndex = 0;
+            char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 
             foreach (char ch in message)
-                shiftedString += cipher(ch, shift);
-            
-            public static char cipher(char ch, int key) { 
-                if (!char.IsLetter(ch)) return ch;
-                return (char)((((ch + key) - ch)% 26) + ch)
+            {
+                index = Array.IndexOf(alphabet, ch);
+                if (encode == true)
+                {
+                    newIndex = index + shift;
+                }
+                else {
+                    newIndex = index - shift;
+                }
+                
+                if (newIndex < 0) newIndex += 26;
+                if (newIndex > 25) newIndex -= 26;
+                shiftedText += alphabet[newIndex];
             }
 
-            return shiftedString;
+            return shiftedText;
 
             throw new NotImplementedException();
         }
