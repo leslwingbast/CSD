@@ -39,6 +39,21 @@ namespace Enigma
         /// 
         public static string Encode(string message, int incrementNumber, List<string> rotors)   
         {
+            //formatting the input message
+            message = FormatInputMessage(message);
+
+            //applying an initial CaesarShift
+            message = CaesarShift(message,incrementNumber, true);
+
+            //applying the keys within the List rotors
+
+            //applying the keys within the List rotors.
+            foreach (string rotor in rotors)
+            {
+                message = ApplyRotor(message, rotor);
+            }            
+
+            return message;
 
             // TO DO - add your implementation
             throw new NotImplementedException();
@@ -193,6 +208,27 @@ namespace Enigma
         /// with the corresponding character in the rotor. </returns>
         private static string ReverseRotor(string message, string rotor)
         {
+            
+            /* I THOUGHT THIS WOULD'VE BEEN IN REVERSE ORDER
+             * GET A CHARRACTER IN message, FIND ITS POSISION IN THE roter AND 
+             * THEN CHANGE IT WITH ITS EQUIVALENT IN THE ALPHABET
+             * 
+             * BUT
+             * 
+             * THIS LOOKS TO ME TO FUNCTION EXACTLY AS ApplyRotor Method.
+             * IF THIS IS IS THE CASE, WOULD IT BE FAIR TO CALL ApplyRotor AND 
+             * USE IT AS THE RETURN VALUE/STRING FOR THIS METHOD?????? THE
+             * 
+             * FOR EXAMPLE 
+                return ApplyRotor(message, rotor);
+
+                IF SO, WHY WOULD WE NEED THIS??????????????
+                
+                SURELY, I MUST BE MISSING SOMETHING HERE!!!!               
+
+             */
+
+
             // TO DO - add your implementation
             throw new NotImplementedException();
         }
