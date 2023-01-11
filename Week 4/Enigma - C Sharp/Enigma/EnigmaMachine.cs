@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -126,8 +128,18 @@ namespace Enigma
         /// specified shift number.</returns>
         public static string CaesarShift(string message, int shift, bool encode)
         {
-            // TO DO - add your implementation
-            // Testing a quick change 2
+            string shiftedString = string.Empty;
+
+            foreach (char ch in message)
+                shiftedString += cipher(ch, shift);
+            
+            public static char cipher(char ch, int key) { 
+                if (!char.IsLetter(ch)) return ch;
+                return (char)((((ch + key) - ch)% 26) + ch)
+            }
+
+            return shiftedString;
+
             throw new NotImplementedException();
         }
 
