@@ -127,7 +127,7 @@ namespace Enigma
         public static string CaesarShift(string message, int shift, bool encode)
         {
             // TO DO - add your implementation
-            // Testing a quick change
+            // Testing a quick change 2
             throw new NotImplementedException();
         }
 
