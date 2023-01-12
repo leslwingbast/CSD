@@ -132,7 +132,10 @@ namespace Enigma
         /// with full stops '.'</returns>
         public static string FormatOutputMessage(string message)
         {
-            // TO DO - add your implementation
+            message = message.Replace("?", " ");
+            _ = message.Replace("$", ".");
+            return message;
+
             throw new NotImplementedException();
         }
 
