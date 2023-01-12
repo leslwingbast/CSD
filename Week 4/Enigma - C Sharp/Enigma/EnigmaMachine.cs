@@ -40,10 +40,20 @@ namespace Enigma
         public static string Encode(string message, int incrementNumber, List<string> rotors)   
         {
 
-            //Alphabet array  
-            string[] alphabet =  {"A","B","C","D","E","F","G","H","I","J","K","L",
-                                "M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
-            };
+            //formatting the input message
+            message = FormatInputMessage(message);
+
+            //applying an initial CaesarShift
+            message = CaesarShift(message, incrementNumber, true);
+
+            //applying the keys within the List rotors to the message.
+            foreach (string rotor in rotors)
+            {
+                message = ApplyRotor(message, rotor);
+
+            }
+
+            return message;
 
             // TO DO - add your implementation
             throw new NotImplementedException();
