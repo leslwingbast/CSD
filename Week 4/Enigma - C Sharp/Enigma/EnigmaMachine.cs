@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -76,6 +77,23 @@ namespace Enigma
         /// <returns>A decoded string.</returns>
         public static string Decode(string message, int incrementNumber, List<string> rotors)
         {
+            //applying the keys within the List rotors to the message in reverse.
+            
+            for (int i = rotors.Count -1; i > -1; i--)
+            {
+                message = ReverseRotor(message, rotors.ElementAt(i));
+
+            }
+
+
+            //applying an initial CaesarShift
+            message = CaesarShift(message, incrementNumber, false);
+
+            //formatting the input message
+            message = FormatOutputMessage(message);
+
+            return message;
+
             // TO DO - add your implementation
             throw new NotImplementedException();
         }
@@ -97,9 +115,9 @@ namespace Enigma
         {
 
 
-            string message_hardcoded = "! & abc.def... _ .";
+  //          string message_hardcoded = message;
 
-            string UpperCase = message_hardcoded.ToUpper();
+            string UpperCase = message.ToUpper();
 
             UpperCase = Regex.Replace(UpperCase, "[^a-zA-Z0-9 _.]", String.Empty);
 
@@ -133,7 +151,7 @@ namespace Enigma
         public static string FormatOutputMessage(string message)
         {
             message = message.Replace("?", " ");
-            _ = message.Replace("$", ".");
+            message = message.Replace("$", ".");
             return message;
 
             throw new NotImplementedException();
@@ -209,11 +227,14 @@ namespace Enigma
         {
             //alpha string variable hold 26 letter in the right order
             string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            
 
             string encodedMessage = "";
 
             for (int i = 0; i < message.Length; i++)
-            {
+            {   
+                bool specialChar = true;
+
                 for (int j = 0; j < alpha.Length; j++)
                 {
                     //26 letters in  alphabet array and 26 letters in rotors Array 
@@ -222,10 +243,16 @@ namespace Enigma
                     //we know its equivalent will be at the same position in rotors array.
                     if (alpha[j].Equals(message[i]))
                     {
-                        encodedMessage += rotor[i];
+                        encodedMessage += rotor[j];                       
+                        specialChar = false;
                         break;
+
                     }
                 }
+                //accounting for special characters
+                if(specialChar)
+                    encodedMessage += message[i];   
+
             }
 
             return encodedMessage;
@@ -233,7 +260,6 @@ namespace Enigma
             // TO DO - add your implementation
             throw new NotImplementedException();
         }
-
 
 
         /// <summary>
@@ -246,31 +272,36 @@ namespace Enigma
         /// <returns>A string with each [A..Z] character in the input string replaced
         /// with the corresponding character in the rotor. </returns>
         private static string ReverseRotor(string message, string rotor)
-        {
-         
+        {         
             //getting the alphabet and in correct order
             string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-            string encodedMessage = "";
+            string decodedMessage = "";
 
             for (int i = 0; i < message.Length; i++)
             {
+                bool specialChar = true;
+
                 for (int j = 0; j < rotor.Length; j++)
-                {
-                    int b = j;
+                {                    
                     //26 letters in  alphabet array and 26 letters in rotors Array 
                     //the positions of every character in one mirrors the other.
                     //as soon as the current character is found in the roter array,
                     //we know its equivalent will be at the same position in alpha array.
                     if (rotor[j].Equals(message[i]))
                     {
-                        encodedMessage += alpha[j];
+                        decodedMessage += alpha[j];
+                        specialChar = false;
                         break;
                     }
                 }
-            }
 
-            return encodedMessage;
+                //accounting for special characters
+                if (specialChar)
+                    decodedMessage += message[i];
+            }           
+
+            return decodedMessage;
 
             // TO DO - add your implementation
             throw new NotImplementedException();
