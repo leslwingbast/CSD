@@ -208,6 +208,31 @@ namespace Enigma
         /// with the corresponding character in the rotor. </returns>
         private static string ReverseRotor(string message, string rotor)
         {
+         
+            //getting the alphabet and in correct order
+            string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            string encodedMessage = "";
+
+            for (int i = 0; i < message.Length; i++)
+            {
+                for (int j = 0; j < rotor.Length; j++)
+                {
+                    int b = j;
+                    //26 letters in  alphabet array and 26 letters in rotors Array 
+                    //the positions of every character in one mirrors the other.
+                    //as soon as the current character is found in the roter array,
+                    //we know its equivalent will be at the same position in alpha array.
+                    if (rotor[j].Equals(message[i]))
+                    {
+                        encodedMessage += alpha[j];
+                        break;
+                    }
+                }
+            }
+
+            return encodedMessage;
+
             // TO DO - add your implementation
             throw new NotImplementedException();
         }
