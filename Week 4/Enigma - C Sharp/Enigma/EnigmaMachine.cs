@@ -97,6 +97,7 @@ namespace Enigma
         public static string FormatInputMessage(string message)
         {
             // TO DO - add your implementation
+            int test = 3;
             throw new NotImplementedException();
         }
 
@@ -119,7 +120,7 @@ namespace Enigma
             // TO DO - add your implementation
             throw new NotImplementedException();
         }
-
+        //TEssssstttttttttttttttttttttttttttttttttttttttttttttttttttttttt for pushhhhh!
         /// <summary>
         /// The CaesarShift method should take a message and shift each character [A-Z] by the 
         /// value shift, incrementing or decrementing the value of shift by 1 or -1 with each 
