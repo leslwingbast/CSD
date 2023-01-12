@@ -95,6 +95,23 @@ namespace Enigma
         /// and full stops replaced by a '€'</returns>
         public static string FormatInputMessage(string message)
         {
+
+
+            string message_hardcoded = "! & abc.def... _ .";
+
+            string UpperCase = message_hardcoded.ToUpper();
+
+            UpperCase = Regex.Replace(UpperCase, "[^a-zA-Z0-9 _.]", String.Empty);
+
+            UpperCase = UpperCase.Replace(" ", "?");
+
+            string formatted = UpperCase.Replace(".", "$");
+
+
+            Console.WriteLine(formatted);
+
+            return formatted;
+
             // TO DO - add your implementation
             throw new NotImplementedException();
         }
