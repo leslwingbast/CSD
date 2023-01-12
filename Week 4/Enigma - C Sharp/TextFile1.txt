@@ -1,0 +1,16 @@
+string message = "! & abc.def.";
+
+string UpperCase = message.ToUpper();
+
+
+
+foreach(char c in message)
+{
+if(c != )
+
+
+
+
+
+
+}

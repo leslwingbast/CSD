@@ -97,7 +97,21 @@ namespace Enigma
         public static string FormatInputMessage(string message)
         {
             // TO DO - add your implementation
-            int test = 3;
+            string message_hardcoded = "! & abc.def... _ .";
+
+            string UpperCase = message_hardcoded.ToUpper();
+
+            UpperCase = Regex.Replace(UpperCase, "[^a-zA-Z0-9 _.]", String.Empty);
+
+            UpperCase = UpperCase.Replace(" ", "?");
+
+            string formatted = UpperCase.Replace(".", "$");
+
+
+            Console.WriteLine(formatted);
+
+            return formatted;
+
             throw new NotImplementedException();
         }
 
