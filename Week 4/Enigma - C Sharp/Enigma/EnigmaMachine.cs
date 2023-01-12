@@ -133,7 +133,10 @@ namespace Enigma
         public static string FormatOutputMessage(string message)
         {
             message = message.Replace("?", " ");
-            _ = message.Replace("$", ".");
+            message = message.Replace("$", ".");
+
+            message = char.ToUpper(message[0]).ToString() + message.Substring(1).ToLower();
+            
             return message;
 
             throw new NotImplementedException();
