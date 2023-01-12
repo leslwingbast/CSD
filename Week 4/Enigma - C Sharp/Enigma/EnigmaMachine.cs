@@ -162,17 +162,26 @@ namespace Enigma
             foreach (char ch in message)
             {
                 index = Array.IndexOf(alphabet, ch);
-                if (encode == true)
+                if (index == -1)
                 {
-                    newIndex = index + shift;
+                    shiftedText += ch;
                 }
-                else {
-                    newIndex = index - shift;
+                else
+                {
+
+                    if (encode == true)
+                    {
+                        newIndex = index + shift;
+                    }
+                    else
+                    {
+                        newIndex = index - shift;
+                    }
+
+                    if (newIndex < 0) newIndex += 26;
+                    if (newIndex > 25) newIndex -= 26;
+                    shiftedText += alphabet[newIndex];
                 }
-                
-                if (newIndex < 0) newIndex += 26;
-                if (newIndex > 25) newIndex -= 26;
-                shiftedText += alphabet[newIndex];
             }
 
             return shiftedText;
